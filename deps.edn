@@ -1,0 +1,13 @@
+{:paths ["src" "resources" "target"]
+
+ :deps {org.clojure/clojure                             {:mvn/version "1.10.1"}
+        org.clojure/core.async                          {:mvn/version "1.2.603"}
+        cljs-http                                       {:mvn/version "0.1.46"}
+        com.bhauman/figwheel-main                       {:mvn/version "0.2.12"}
+        com.cognitect/transit-clj                       {:mvn/version "0.8.319"}
+        borkdude/edamame                                {:mvn/version "0.0.11-alpha.1"}
+        expound                                         {:mvn/version "0.8.4"}}
+
+ :aliases
+ {:dev {:extra-paths ["dev"]
+        :extra-deps {environ                    {:mvn/version "1.1.0"}}}}}

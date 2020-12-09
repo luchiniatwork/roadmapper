@@ -1,0 +1,174 @@
+{:tasks
+ [
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; MV
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  {:id "us-res-mv-bep-cutover"
+   :description "MV BEP cutover"
+   :group "cx"
+   :resource "MV"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  {:id "us-res-mv-hardening"
+   :description "MV Hardening"
+   :group "cx"
+   :resource "MV"
+   :follows ["us-res-mv-bep-cutover"]
+   :effort "1 month"}
+
+  {:id "us-res-mv-stability"
+   :description "MV Stability"
+   :group "cx"
+   :resource "MV"
+   :follows ["us-res-mv-hardening"]
+   :effort "1 month"}
+
+  {:id "us-res-mv-gbs"
+   :description "GBS integration"
+   :group "cx"
+   :resource "MV/BV"
+   :follows ["us-res-mv-stability"]
+   :effort "1 quarter"}
+
+  {:id "us-res-mv-hornet"
+   :description "Project Hornet"
+   :group "cx"
+   :resource "MV/BV"
+   :follows ["us-res-mv-stability"]
+   :effort "1 quarter"}
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; BV
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  {:id "us-res-bv-bep-cutover"
+   :description "BV BEP cutover"
+   :group "cx"
+   :resource "BV"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  {:id "us-res-bv-hardening"
+   :description "BV Hardening"
+   :group "cx"
+   :resource "BV"
+   :follows ["us-res-bv-bep-cutover"]
+   :effort "1 month"}
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Digital First
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  {:id "df-base"
+   :description "Digital First"
+   :group "ts"
+   :resource "Thinslices"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  {:id "df-hardening"
+   :description "DF Hardening"
+   :group "ts"
+   :resource "Thinslices"
+   :follows ["df-base"]
+   :effort "1 month"}
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; TechTools
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  {:id "tt-bep-cutover"
+   :description "TechTools BEP Cutover"
+   :group "dublin"
+   :resource "Dublin"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  {:id "tt-hardening"
+   :description "TechTools Hardening"
+   :group "dublin"
+   :resource "Dublin"
+   :follows ["tt-bep-cutover"]
+   :effort "1 month"}
+
+  {:id "tt-ongoing"
+   :description "TechTools OnGoing Features???"
+   :group "dublin"
+   :resource "Dublin"
+   :follows ["tt-hardening"]
+   :effort "1 month"}
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Global Track
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  {:id "gt-foundation"
+   :description "Global Foundation"
+   :group "ts2"
+   :resource "Thinslices"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  {:id "gt-merge-brazil"
+   :description "Merge - Target: Brazil"
+   :group "global"
+   :resource "Global Team"
+   :follows ["gt-foundation" "beam-prep" "identity-prep" "payments-prep" "chat-prep"]
+   :effort "1 month"}
+
+  {:id "gt-merge-digital-first"
+   :description "Merge - Target: Digital First"
+   :group "global"
+   :resource "Global Team"
+   :follows ["gt-merge-brazil"]
+   :effort "1 month"}
+
+  {:id "gt-merge-us-1"
+   :description "Merge - Target: US part 1"
+   :group "global"
+   :resource "Global Team"
+   :follows ["gt-merge-digital-first"]
+   :effort "1 month"}
+
+  {:id "gt-merge-us-2"
+   :description "Merge - Target: US part 2"
+   :group "global"
+   :resource "Global Team"
+   :follows ["gt-merge-us-1"]
+   :effort "1 month"}
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Other Teams
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  {:id "beam-prep"
+   :description "Component Library Prep"
+   :group "others"
+   :resource "Divante/BEAM"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  {:id "identity-prep"
+   :description "User Account Management Prep"
+   :group "others"
+   :resource "Vega"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  {:id "payments-prep"
+   :description "Payments Prep"
+   :group "others"
+   :resource "CEP Payments"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  {:id "chat-prep"
+   :description "Customer Communication Prep"
+   :group "others"
+   :resource "CEP Care/Boston Chat Bot"
+   :start "Q4/2020"
+   :effort "1 quarter"}
+
+  ]}
