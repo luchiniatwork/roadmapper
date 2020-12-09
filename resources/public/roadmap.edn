@@ -9,7 +9,7 @@
    :group "cx"
    :resource "MV"
    :start "Q4/2020"
-   :effort "1 quarter"}
+   :end "2021/01/16"}
 
   {:id "us-res-mv-hardening"
    :description "MV Hardening"
@@ -48,7 +48,7 @@
    :group "cx"
    :resource "BV"
    :start "Q4/2020"
-   :effort "1 quarter"}
+   :end "2021/01/16"}
 
   {:id "us-res-bv-hardening"
    :description "BV Hardening"
@@ -66,7 +66,7 @@
    :group "ts"
    :resource "Thinslices"
    :start "Q4/2020"
-   :effort "1 quarter"}
+   :end "Q2/2021"}
 
   {:id "df-hardening"
    :description "DF Hardening"
@@ -84,7 +84,7 @@
    :group "dublin"
    :resource "Dublin"
    :start "Q4/2020"
-   :effort "1 quarter"}
+   :end "2021/01/16"}
 
   {:id "tt-hardening"
    :description "TechTools Hardening"
@@ -98,7 +98,7 @@
    :group "dublin"
    :resource "Dublin"
    :follows ["tt-hardening"]
-   :effort "1 month"}
+   :effort "1 quarter"}
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Global Track
@@ -108,15 +108,20 @@
    :description "Global Foundation"
    :group "ts2"
    :resource "Thinslices"
-   :start "Q4/2020"
-   :effort "1 quarter"}
+   :start "2021/02/01"
+   :end "2021/04/16"}
 
   {:id "gt-merge-brazil"
    :description "Merge - Target: Brazil"
    :group "global"
    :resource "Global Team"
-   :follows ["gt-foundation" "beam-prep" "identity-prep" "payments-prep" "chat-prep"]
-   :effort "1 month"}
+   :follows ["gt-foundation"
+             "beam-prep" "identity-prep" "payments-prep" "chat-prep"
+             "us-res-mv-gbs" "us-res-mv-hornet"
+             "us-res-bv-hardening"
+             "df-hardening"
+             "tt-ongoing" "tt-hardening"]
+   :effort "1 quarter"}
 
   {:id "gt-merge-digital-first"
    :description "Merge - Target: Digital First"
@@ -130,7 +135,7 @@
    :group "global"
    :resource "Global Team"
    :follows ["gt-merge-digital-first"]
-   :effort "1 month"}
+   :effort "1 quarter"}
 
   {:id "gt-merge-us-2"
    :description "Merge - Target: US part 2"
@@ -147,28 +152,28 @@
    :description "Component Library Prep"
    :group "others"
    :resource "Divante/BEAM"
-   :start "Q4/2020"
+   :start "Q1/2021"
    :effort "1 quarter"}
 
   {:id "identity-prep"
    :description "User Account Management Prep"
    :group "others"
    :resource "Vega"
-   :start "Q4/2020"
+   :start "Q1/2021"
    :effort "1 quarter"}
 
   {:id "payments-prep"
    :description "Payments Prep"
    :group "others"
    :resource "CEP Payments"
-   :start "Q4/2020"
+   :start "Q1/2021"
    :effort "1 quarter"}
 
   {:id "chat-prep"
    :description "Customer Communication Prep"
    :group "others"
    :resource "CEP Care/Boston Chat Bot"
-   :start "Q4/2020"
+   :start "Q1/2021"
    :effort "1 quarter"}
 
   ]}

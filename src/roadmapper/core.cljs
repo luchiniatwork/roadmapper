@@ -31,9 +31,51 @@
 (defmethod to-ms :quarter [[n & _]]
   (* 3 (to-ms [n :months])))
 
+(defmethod to-ms :default [_]
+  nil)
+
 (defn parse-effort [effort]
   (let [parts (s/split effort #" ")]
     [(-> parts first js/parseInt) (-> parts last keyword)]))
+
+(defmulti parse-date
+  (fn [date-str]
+    (let [parts (s/split date-str #"/")]
+      (cond (= 3 (count parts))
+            :full-date
+
+            (and (= 2 (count parts)) (= "Q" (ffirst parts)))
+            :quarter
+
+            (and (= 2 (count parts)))
+            :month))))
+
+(defmethod parse-date :quarter [date-str]
+  (let [[quarter year] (s/split date-str #"/")
+        month (condp = quarter
+                "Q1" 1 "Q2" 4
+                "Q3" 7 "Q4" 10)
+        year' (js/parseInt year)
+        month' (dec month)]
+    (js/Date. year' month' 1)))
+
+(defmethod parse-date :month [date-str]
+  (let [[month year] (s/split date-str #"/")
+        months {"jan" 1 "feb" 2 "mar" 3 "apr" 4 "may" 5 "jun" 6
+                "jul" 7 "aug" 8 "sep" 9 "oct" 10 "nov" 11 "dec" 12}
+        month' (->> month s/lower-case (get months) dec)
+        year' (js/parseInt year)]
+    (js/Date. year' month' 1)))
+
+(defmethod parse-date :full-date [date-str]
+  (let [[year month day] (s/split date-str #"/")
+        day' (-> day js/parseInt)
+        month' (-> month js/parseInt dec)
+        year' (-> year js/parseInt)]
+    (js/Date. year' month' day')))
+
+(defmethod parse-date :default [date-str]
+  nil)
 
 (defn set-columns [dt]
   (doto dt
@@ -67,7 +109,9 @@
 (defn format-data [{:keys [tasks]}]
   (map (fn [{:keys [id group start end completed]
              :as task}]
-         [id (description task) group nil nil (duration task) 0 (dependencies task)])
+         [id (description task) group
+          (parse-date start) (parse-date end) (duration task)
+          0 (dependencies task)])
        tasks))
 
 (defn ^:export draw-chart []
