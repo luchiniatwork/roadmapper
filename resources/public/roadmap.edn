@@ -1,8 +1,8 @@
 {:tasks
  [
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; MV
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   {:id "us-res-mv-bep-cutover"
    :description "MV BEP cutover"
@@ -39,9 +39,9 @@
    :follows ["us-res-mv-stability"]
    :effort "1 quarter"}
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; BV
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
   {:id "us-res-bv-bep-cutover"
    :description "BV BEP cutover"
@@ -57,9 +57,9 @@
    :follows ["us-res-bv-bep-cutover"]
    :effort "1 month"}
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Digital First
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
   {:id "df-base"
    :description "Digital First"
@@ -75,9 +75,9 @@
    :follows ["df-base"]
    :effort "1 month"}
   
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; TechTools
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   {:id "tt-bep-cutover"
    :description "TechTools BEP Cutover"
@@ -91,18 +91,20 @@
    :group "dublin"
    :resource "Dublin"
    :follows ["tt-bep-cutover"]
-   :effort "1 month"}
+   :start "2021/01/17"
+   :end "2021/02/01"}
 
   {:id "tt-ongoing"
-   :description "TechTools OnGoing Features???"
+   :description "Rolling Improvements & VS3 Rollout"
    :group "dublin"
    :resource "Dublin"
    :follows ["tt-hardening"]
-   :effort "1 quarter"}
+   :start "2021/02/02"
+   :end "2021/12/31"}
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Global Track
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   {:id "gt-foundation"
    :description "Global Foundation"
@@ -119,8 +121,7 @@
              "beam-prep" "identity-prep" "payments-prep" "chat-prep"
              "us-res-mv-gbs" "us-res-mv-hornet"
              "us-res-bv-hardening"
-             "df-hardening"
-             "tt-ongoing" "tt-hardening"]
+             "df-hardening"]
    :effort "1 quarter"}
 
   {:id "gt-merge-digital-first"
@@ -144,9 +145,16 @@
    :follows ["gt-merge-us-1"]
    :effort "1 month"}
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  {:id "gt-merge-us-techtools"
+   :description "Merge - Target: TechTools US"
+   :group "global"
+   :resource "Global Team"
+   :follows ["gt-merge-us-2" "tt-ongoing"]
+   :effort "1 quarter"}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Other Teams
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   {:id "beam-prep"
    :description "Component Library Prep"
