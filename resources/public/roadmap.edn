@@ -8,7 +8,7 @@
    :description "MV BEP cutover"
    :group "cx"
    :resource "MV"
-   :start "Q4/2020"
+   :start "Q1/2021"
    :end "2021/01/16"}
 
   {:id "us-res-mv-hardening"
@@ -16,29 +16,43 @@
    :group "cx"
    :resource "MV"
    :follows ["us-res-mv-bep-cutover"]
-   :effort "1 month"}
+   :effort "3 weeks"}
 
   {:id "us-res-mv-stability"
    :description "MV Stability"
    :group "cx"
    :resource "MV"
    :follows ["us-res-mv-hardening"]
-   :effort "1 month"}
+   :effort "3 weeks"}
 
   {:id "us-res-mv-gbs"
    :description "GBS integration"
    :group "cx"
    :resource "MV/BV"
-   :follows ["us-res-mv-stability"]
+   :follows ["us-res-mv-hornet-1"]
    :effort "1 quarter"}
 
-  {:id "us-res-mv-hornet"
-   :description "Project Hornet"
+  {:id "us-res-mv-hornet-1"
+   :description "Project Hornet I"
    :group "cx"
    :resource "MV/BV"
    :follows ["us-res-mv-stability"]
+   :effort "5 weeks"}
+
+  {:id "us-res-mv-hornet-rest"
+   :description "Project Hornet I+"
+   :group "cx"
+   :resource "MV/BV"
+   :follows ["us-res-mv-hornet-1"]
    :effort "1 quarter"}
 
+  {:id "us-res-mv-analytics"
+   :description "Analytics Improvements/QA"
+   :group "cx"
+   :start "Q1/2021"
+   :resource "MV/BV"
+   :effort "8 weeks"}
+  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; BV
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -47,7 +61,7 @@
    :description "BV BEP cutover"
    :group "cx"
    :resource "BV"
-   :start "Q4/2020"
+   :start "Q1/2021"
    :end "2021/01/16"}
 
   {:id "us-res-bv-hardening"
@@ -55,133 +69,140 @@
    :group "cx"
    :resource "BV"
    :follows ["us-res-bv-bep-cutover"]
-   :effort "1 month"}
+   :effort "3 weeks"}
+
+  {:id "us-res-bv-brazil"
+   :description "BV Brazil"
+   :group "cx"
+   :resource "BV"
+   :follows ["us-res-bv-hardening"]
+   :effort "8 weeks"}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Digital First
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
-  {:id "df-base"
-   :description "Digital First"
-   :group "ts"
-   :resource "Thinslices"
-   :start "Q4/2020"
-   :end "Q2/2021"}
+  #_{:id "df-base"
+     :description "Digital First"
+     :group "ts"
+     :resource "Thinslices"
+     :start "Q4/2020"
+     :end "Q2/2021"}
 
-  {:id "df-hardening"
-   :description "DF Hardening"
-   :group "ts"
-   :resource "Thinslices"
-   :follows ["df-base"]
-   :effort "1 month"}
+  #_{:id "df-hardening"
+     :description "DF Hardening"
+     :group "ts"
+     :resource "Thinslices"
+     :follows ["df-base"]
+     :effort "1 month"}
   
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; TechTools
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  {:id "tt-bep-cutover"
-   :description "TechTools BEP Cutover"
-   :group "dublin"
-   :resource "Dublin"
-   :start "Q4/2020"
-   :end "2021/01/16"}
+  #_{:id "tt-bep-cutover"
+     :description "TechTools BEP Cutover"
+     :group "dublin"
+     :resource "Dublin"
+     :start "Q4/2020"
+     :end "2021/01/16"}
 
-  {:id "tt-hardening"
-   :description "TechTools Hardening"
-   :group "dublin"
-   :resource "Dublin"
-   :follows ["tt-bep-cutover"]
-   :start "2021/01/17"
-   :end "2021/02/01"}
+  #_{:id "tt-hardening"
+     :description "TechTools Hardening"
+     :group "dublin"
+     :resource "Dublin"
+     :follows ["tt-bep-cutover"]
+     :start "2021/01/17"
+     :end "2021/02/01"}
 
-  {:id "tt-ongoing"
-   :description "Rolling Improvements & VS3 Rollout"
-   :group "dublin"
-   :resource "Dublin"
-   :follows ["tt-hardening"]
-   :start "2021/02/02"
-   :end "2021/12/31"}
+  #_{:id "tt-ongoing"
+     :description "Rolling Improvements & VS3 Rollout"
+     :group "dublin"
+     :resource "Dublin"
+     :follows ["tt-hardening"]
+     :start "2021/02/02"
+     :end "2021/12/31"}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Global Track
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  {:id "gt-foundation"
-   :description "Global Foundation"
-   :group "ts2"
-   :resource "Thinslices"
-   :start "2021/02/01"
-   :end "2021/04/16"}
+  #_{:id "gt-foundation"
+     :description "Global Foundation"
+     :group "ts2"
+     :resource "Thinslices"
+     :start "2021/02/01"
+     :end "2021/04/16"}
 
-  {:id "gt-merge-brazil"
-   :description "Merge - Target: Brazil"
-   :group "global"
-   :resource "Global Team"
-   :follows ["gt-foundation"
-             "beam-prep" "identity-prep" "payments-prep" "chat-prep"
-             "us-res-mv-gbs" "us-res-mv-hornet"
-             "us-res-bv-hardening"
-             "df-hardening"]
-   :effort "1 quarter"}
+  #_{:id "gt-merge-brazil"
+     :description "Merge - Target: Brazil"
+     :group "global"
+     :resource "Global Team"
+     :follows ["gt-foundation"
+               "beam-prep" "identity-prep" "payments-prep" "chat-prep"
+               "us-res-mv-gbs" "us-res-mv-hornet-1"
+               "us-res-bv-hardening"
+               "df-hardening"]
+     :effort "1 quarter"}
 
-  {:id "gt-merge-digital-first"
-   :description "Merge - Target: Digital First"
-   :group "global"
-   :resource "Global Team"
-   :follows ["gt-merge-brazil"]
-   :effort "1 month"}
+  #_{:id "gt-merge-digital-first"
+     :description "Merge - Target: Digital First"
+     :group "global"
+     :resource "Global Team"
+     :follows ["gt-merge-brazil"]
+     :effort "1 month"}
 
-  {:id "gt-merge-us-1"
-   :description "Merge - Target: US part 1"
-   :group "global"
-   :resource "Global Team"
-   :follows ["gt-merge-digital-first"]
-   :effort "1 quarter"}
+  #_{:id "gt-merge-us-1"
+     :description "Merge - Target: US part 1"
+     :group "global"
+     :resource "Global Team"
+     :follows ["gt-merge-digital-first"]
+     :effort "1 quarter"}
 
-  {:id "gt-merge-us-2"
-   :description "Merge - Target: US part 2"
-   :group "global"
-   :resource "Global Team"
-   :follows ["gt-merge-us-1"]
-   :effort "1 month"}
+  #_{:id "gt-merge-us-2"
+     :description "Merge - Target: US part 2"
+     :group "global"
+     :resource "Global Team"
+     :follows ["gt-merge-us-1"]
+     :effort "1 month"}
 
-  {:id "gt-merge-us-techtools"
-   :description "Merge - Target: TechTools US"
-   :group "global"
-   :resource "Global Team"
-   :follows ["gt-merge-us-2" "tt-ongoing"]
-   :effort "1 quarter"}
+  #_{:id "gt-merge-us-techtools"
+     :description "Merge - Target: TechTools US"
+     :group "global"
+     :resource "Global Team"
+     :follows ["gt-merge-us-2" "tt-ongoing"]
+     :effort "1 quarter"}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Other Teams
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  {:id "beam-prep"
-   :description "Component Library Prep"
-   :group "others"
-   :resource "Divante/BEAM"
-   :start "Q1/2021"
-   :effort "1 quarter"}
+  #_{:id "beam-prep"
+     :description "Component Library Prep"
+     :group "others"
+     :resource "Divante/BEAM"
+     :start "Q1/2021"
+     :effort "1 quarter"}
 
-  {:id "identity-prep"
-   :description "User Account Management Prep"
-   :group "others"
-   :resource "Vega"
-   :start "Q1/2021"
-   :effort "1 quarter"}
+  #_{:id "identity-prep"
+     :description "User Account Management Prep"
+     :group "others"
+     :resource "Vega"
+     :start "Q1/2021"
+     :effort "1 quarter"}
 
-  {:id "payments-prep"
-   :description "Payments Prep"
-   :group "others"
-   :resource "CEP Payments"
-   :start "Q1/2021"
-   :effort "1 quarter"}
+  #_{:id "payments-prep"
+     :description "Payments Prep"
+     :group "others"
+     :resource "CEP Payments"
+     :start "Q1/2021"
+     :effort "1 quarter"}
 
-  {:id "chat-prep"
-   :description "Customer Communication Prep"
-   :group "others"
-   :resource "CEP Care/Boston Chat Bot"
-   :start "Q1/2021"
-   :effort "1 quarter"}
+  #_{:id "chat-prep"
+     :description "Customer Communication Prep"
+     :group "others"
+     :resource "CEP Care/Boston Chat Bot"
+     :start "Q1/2021"
+     :effort "1 quarter"}
 
   ]}
