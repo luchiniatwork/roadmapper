@@ -1,6 +1,6 @@
 (ns roadmapper.core
   (:require [cljs-http.client :as http]
-            [cljs.core.async :refer [<! go]]
+            [cljs.core.async :refer [<! go] :as async]
             [clojure.string :as s]))
 
 (enable-console-print!)
@@ -90,7 +90,7 @@
 
 (defn fetch-data []
   (go
-    (let [{:keys [status body]} (<! (http/get "roadmap.edn"))]
+    (let [{:keys [status body]} (<! (http/get "roadmap.json"))]
       (if (= 200 status)
         body
         (throw (ex-info "Can't find roadmap.edn file" {}))))))
@@ -118,7 +118,6 @@
   (go
     (let [chart (google.visualization.Gantt. (js/document.getElementById "chart_div"))
           data (<! (fetch-data))]
-      (println (format-data data))
       (.draw chart
              (doto (google.visualization.DataTable.)
                set-columns

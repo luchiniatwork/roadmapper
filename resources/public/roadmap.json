@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "task1",
+      "description": "task by end time",
+      "resource": "people",
+      "group": "1",
+      "start": "Q3/2023",
+      "end": "2023/07/16"
+    },
+    {
+      "id": "task2",
+      "description": "task by effort",
+      "resource": "people",
+      "group": "1",
+      "follows": ["task1"],
+      "effort": "3 weeks"
+    },
+    {
+      "id": "task3",
+      "description": "task by effort another group",
+      "resource": "people",
+      "group": "1",
+      "follows": ["task1"],
+      "effort": "5 weeks"
+    }
+  ]
+}
